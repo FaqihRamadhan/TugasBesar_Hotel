@@ -1,98 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HotelDB — Manajemen Hotel</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--nv:#0F1B2D;--gd:#C9A84C;--bg:#F0F4F8;--w:#fff;--bd:#DDE3EC;--tx:#1A2535;--mu:#6B7A99;--gn:#10B981;--og:#F59E0B;--rd:#EF4444;--bl:#2563EB;--r:12px}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
-header{background:var(--nv);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(0,0,0,.25)}
-.brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:16px;font-weight:700}
-.brand b{background:var(--gd);border-radius:7px;width:30px;height:30px;display:grid;place-items:center;font-style:normal}
-.hbadge{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gd);font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:3px 10px;border-radius:99px}
-.wrap{max-width:1240px;margin:0 auto;padding:24px 16px 60px}
-h1{font-size:20px;font-weight:700;color:var(--nv)}
-h1+p{font-size:12px;color:var(--mu);margin-top:3px}
-.tabs{display:flex;gap:6px;margin:16px 0;flex-wrap:wrap}
-.tab{padding:8px 16px;border:1.5px solid var(--bd);background:var(--w);border-radius:99px;font:600 12.5px 'Inter',sans-serif;color:var(--mu);cursor:pointer;transition:.15s}
-.tab:hover{border-color:var(--nv);color:var(--nv)}
-.tab.on{background:var(--nv);border-color:var(--nv);color:#fff}
-[hidden]{display:none!important}
-.grid{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:18px;align-items:start}
-.card{background:var(--w);border-radius:var(--r);box-shadow:0 4px 20px rgba(15,27,45,.09);border:1px solid var(--bd);overflow:hidden}
-.ch{background:var(--nv);padding:14px 20px;display:flex;align-items:center;gap:8px}
-.ch h2{font-size:13.5px;font-weight:600;color:#fff}
-.bar{width:3px;height:16px;background:var(--gd);border-radius:2px;flex-shrink:0}
-.cb{padding:18px}
-.fg{margin-bottom:12px;min-width:0}
-.fg label{display:block;font-size:10.5px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
-.fg input,.fg select{width:100%;min-width:0;padding:8px 10px;border:1.5px solid var(--bd);border-radius:7px;font:13.5px 'Inter',sans-serif;color:var(--tx);background:#FAFBFD;outline:none;transition:.15s}
-.fg input:focus,.fg select:focus{border-color:var(--nv);box-shadow:0 0 0 3px rgba(15,27,45,.06);background:#fff}
-.fg2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
-.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border:none;border-radius:7px;font:600 12.5px 'Inter',sans-serif;cursor:pointer;width:100%;margin-top:5px;transition:.15s}
-.btn-p{background:var(--nv);color:#fff}.btn-p:hover{background:#1A2E4A;transform:translateY(-1px)}
-.btn-c{background:#F0F4F8;color:var(--mu);display:none}.btn-c:hover{background:#E2E8F0}
-.mode{display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:7px;font-size:11.5px;font-weight:600;margin-bottom:12px}
-.ma{background:#ECFDF5;color:#065F46}.me{background:#FFF7ED;color:#92400E}
-.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}.ma .dot{background:var(--gn)}.me .dot{background:var(--og)}
-hr{border:none;border-top:1px solid var(--bd);margin:14px 0}
-.bar2{padding:12px 18px;border-bottom:1px solid var(--bd);font-size:12.5px;color:var(--mu)}
-.bar2 strong{color:var(--tx)}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-th{background:#F8FAFC;color:var(--mu);font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:10px 13px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}
-td{padding:11px 13px;font-size:12.5px;border-bottom:1px solid #F0F4F8;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#F8FBFF}
-.id{font-weight:700;color:var(--nv);font-size:14px}
-.bdg{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:600}
-.bdg i{width:6px;height:6px;border-radius:50%;font-style:normal}
-.ba,.bc{background:#ECFDF5;color:#059669}.ba i,.bc i{background:var(--gn)}
-.bo,.bx{background:#FEF2F2;color:#DC2626}.bo i,.bx i{background:var(--rd)}
-.bm{background:#FFFBEB;color:#D97706}.bm i{background:var(--og)}
-.bg{background:#EFF6FF;color:var(--bl)}.bg i{background:var(--bl)}
-.tag{display:inline-block;background:#F0F4F8;color:var(--mu);font-size:10.5px;padding:2px 6px;border-radius:4px;margin:1px}
-.ta{display:flex;gap:5px;flex-wrap:wrap}
-.be,.bd{display:inline-flex;align-items:center;gap:3px;padding:5px 9px;border:none;border-radius:5px;font:600 11.5px 'Inter',sans-serif;cursor:pointer;transition:.15s;white-space:nowrap}
-.be{background:#EFF6FF;color:var(--bl)}.be:hover{background:#DBEAFE}
-.bd{background:#FEF2F2;color:#DC2626}.bd:hover{background:#FEE2E2}
-.pg{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid var(--bd);flex-wrap:wrap;gap:8px}
-.pi{font-size:11.5px;color:var(--mu)}
-.pn{display:flex;gap:4px;flex-wrap:wrap}
-.pb{min-width:30px;height:30px;padding:0 8px;border:1.5px solid var(--bd);background:#fff;color:var(--mu);border-radius:6px;font:600 12px 'Inter',sans-serif;cursor:pointer;transition:.15s}
-.pb:hover:not(.on){border-color:var(--nv);color:var(--nv)}
-.pb.on{background:var(--nv);border-color:var(--nv);color:#fff}
-.fp{width:24px;height:24px;border-radius:50%;background:var(--bg);border:1.5px solid var(--bd);display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:var(--nv)}
-.rc{display:flex;flex-direction:column;gap:1px}
-.rc b{font-size:12.5px}.rc small{font-size:10.5px;color:var(--mu)}.rc em{font-size:11px;color:var(--rd);font-style:italic}
-.pc{font-variant-numeric:tabular-nums}.pc small{display:block;color:var(--mu);font-size:10.5px;font-weight:400}
-#toast{position:fixed;bottom:20px;right:20px;padding:12px 16px;border-radius:9px;font:600 12.5px 'Inter',sans-serif;color:#fff;z-index:999;opacity:0;transform:translateY(10px);transition:.3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;display:flex;align-items:center;gap:7px;min-width:190px;box-shadow:0 8px 20px rgba(0,0,0,.18)}
-#toast.show{opacity:1;transform:translateY(0)}
-#toast.s{background:#064E3B}#toast.e{background:#7F1D1D}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-@media(max-width:480px){.fg2{grid-template-columns:1fr}.tabs{gap:4px}.tab{padding:7px 12px;font-size:12px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>HotelDB — Manajemen Hotel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header>
-  <div class="brand"><b>🏨</b> Hotel<span style="color:var(--gd)">DB</span></div>
+  <div class="brand"><b>🏨</b> TUGAS BESAR<span style="color:var(--gd)">DATABASE</span></div>
   <span class="hbadge">CRUD Fullstack</span>
 </header>
+
 <div class="wrap">
   <h1>Manajemen Database Hotel</h1>
   <p>Kelola Kamar, Tamu, dan Pemesanan — lengkap dengan relasi antar koleksi.</p>
+
   <div class="tabs">
     <button class="tab on" data-tab="rooms">🛏 Rooms</button>
     <button class="tab" data-tab="guests">👤 Guests</button>
     <button class="tab" data-tab="bookings">📅 Bookings</button>
   </div>
 
+  <!-- ROOMS -->
   <section id="p-rooms" data-panel="rooms">
     <div class="grid">
-      <div class="card"><div class="ch"><div class="bar"></div><span>🛏</span><h2 id="rFT">Tambah Kamar Baru</h2></div>
-        <div class="cb"><div class="mode ma" id="rMI"><span class="dot"></span><span id="rMT">Mode: Tambah Data Baru</span></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>🛏</span><h2 id="rFT">Tambah Kamar Baru</h2></div>
+        <div class="cb">
+          <div class="mode ma" id="rMI"><span class="dot"></span><span id="rMT">Mode: Tambah Data Baru</span></div>
           <form id="rF">
             <div class="fg"><label>Nomor Kamar</label><input id="rId" type="number" placeholder="305" required></div>
             <div class="fg2">
@@ -102,23 +40,31 @@ tr:hover td{background:#F8FBFF}
             <div class="fg"><label>Harga (Rp)</label><input id="rPr" placeholder="750.000" oninput="fmtRp(this)" required></div>
             <div class="fg"><label>Fasilitas (pisah koma)</label><input id="rFc" placeholder="AC, WiFi, TV" required></div>
             <div class="fg"><label>Status</label><select id="rSt" required><option>Available</option><option>Occupied</option><option>Maintenance</option></select></div>
-            <hr><button type="submit" class="btn btn-p" id="rBS">💾 Simpan Kamar</button>
+            <hr>
+            <button type="submit" class="btn btn-p" id="rBS">💾 Simpan Kamar</button>
             <button type="button" class="btn btn-c" id="rBC">✕ Batal Edit</button>
           </form>
         </div>
       </div>
-      <div class="card"><div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Kamar</h2></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Kamar</h2></div>
         <div class="bar2"><span id="rCnt">Memuat...</span></div>
-        <div class="tw"><table><thead><tr><th>No</th><th>Tipe</th><th>Harga</th><th>Fasilitas</th><th>Status</th><th>Lt</th><th>Aksi</th></tr></thead><tbody id="rTB"></tbody></table></div>
+        <div class="tw">
+          <table><thead><tr><th>No</th><th>Tipe</th><th>Harga</th><th>Fasilitas</th><th>Status</th><th>Lt</th><th>Aksi</th></tr></thead>
+          <tbody id="rTB"></tbody></table>
+        </div>
         <div class="pg"><span class="pi" id="rPI">—</span><div class="pn" id="rPN"></div></div>
       </div>
     </div>
   </section>
 
+  <!-- GUESTS -->
   <section id="p-guests" data-panel="guests" hidden>
     <div class="grid">
-      <div class="card"><div class="ch"><div class="bar"></div><span>👤</span><h2 id="gFT">Tambah Tamu Baru</h2></div>
-        <div class="cb"><div class="mode ma" id="gMI"><span class="dot"></span><span id="gMT">Mode: Tambah Data Baru</span></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>👤</span><h2 id="gFT">Tambah Tamu Baru</h2></div>
+        <div class="cb">
+          <div class="mode ma" id="gMI"><span class="dot"></span><span id="gMT">Mode: Tambah Data Baru</span></div>
           <form id="gF">
             <div class="fg"><label>ID Tamu</label><input id="gId" placeholder="G011" required></div>
             <div class="fg"><label>Nama Lengkap</label><input id="gNm" placeholder="Rahmat Hidayat" required></div>
@@ -127,23 +73,31 @@ tr:hover td{background:#F8FBFF}
               <div class="fg"><label>Telepon</label><input id="gPh" placeholder="0812xxxxxxx" required></div>
               <div class="fg"><label>Kota</label><input id="gCt" placeholder="Semarang" required></div>
             </div>
-            <hr><button type="submit" class="btn btn-p" id="gBS">💾 Simpan Tamu</button>
+            <hr>
+            <button type="submit" class="btn btn-p" id="gBS">💾 Simpan Tamu</button>
             <button type="button" class="btn btn-c" id="gBC">✕ Batal Edit</button>
           </form>
         </div>
       </div>
-      <div class="card"><div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Tamu</h2></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Tamu</h2></div>
         <div class="bar2"><span id="gCnt">Memuat...</span></div>
-        <div class="tw"><table><thead><tr><th>ID</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Kota</th><th>Aksi</th></tr></thead><tbody id="gTB"></tbody></table></div>
+        <div class="tw">
+          <table><thead><tr><th>ID</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Kota</th><th>Aksi</th></tr></thead>
+          <tbody id="gTB"></tbody></table>
+        </div>
         <div class="pg"><span class="pi" id="gPI">—</span><div class="pn" id="gPN"></div></div>
       </div>
     </div>
   </section>
 
+  <!-- BOOKINGS -->
   <section id="p-bookings" data-panel="bookings" hidden>
     <div class="grid">
-      <div class="card"><div class="ch"><div class="bar"></div><span>📅</span><h2 id="bFT">Tambah Pemesanan Baru</h2></div>
-        <div class="cb"><div class="mode ma" id="bMI"><span class="dot"></span><span id="bMT">Mode: Tambah Data Baru</span></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>📅</span><h2 id="bFT">Tambah Pemesanan Baru</h2></div>
+        <div class="cb">
+          <div class="mode ma" id="bMI"><span class="dot"></span><span id="bMT">Mode: Tambah Data Baru</span></div>
           <form id="bF">
             <div class="fg"><label>ID Pemesanan</label><input id="bId" placeholder="B004" required></div>
             <div class="fg"><label>Tamu</label><select id="bGs" required><option value="">— Pilih Tamu —</option></select></div>
@@ -152,117 +106,26 @@ tr:hover td{background:#F8FBFF}
             <div class="fg"><label>Check-out</label><input id="bCO" type="date" required></div>
             <div class="fg"><label>Total Bayar (Rp)</label><input id="bTp" placeholder="Pilih kamar &amp; tanggal dahulu" readonly></div>
             <div class="fg"><label>Status</label><select id="bSt" required><option>On-Going</option><option>Completed</option><option>Cancelled</option></select></div>
-            <hr><button type="submit" class="btn btn-p" id="bBS">💾 Simpan Pemesanan</button>
+            <hr>
+            <button type="submit" class="btn btn-p" id="bBS">💾 Simpan Pemesanan</button>
             <button type="button" class="btn btn-c" id="bBC">✕ Batal Edit</button>
           </form>
         </div>
       </div>
-      <div class="card"><div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Pemesanan</h2></div>
+      <div class="card">
+        <div class="ch"><div class="bar"></div><span>📋</span><h2>Daftar Pemesanan</h2></div>
         <div class="bar2"><span id="bCnt">Memuat...</span></div>
-        <div class="tw"><table><thead><tr><th>ID</th><th>Tamu</th><th>Kamar</th><th>Check-in</th><th>Check-out</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="bTB"></tbody></table></div>
+        <div class="tw">
+          <table><thead><tr><th>ID</th><th>Tamu</th><th>Kamar</th><th>Check-in</th><th>Check-out</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="bTB"></tbody></table>
+        </div>
         <div class="pg"><span class="pi" id="bPI">—</span><div class="pn" id="bPN"></div></div>
       </div>
     </div>
   </section>
 </div>
+
 <div id="toast"></div>
-<script>
-const A='http://localhost:3000/api',$=id=>document.getElementById(id);
-let rP=1,rE=0,gP=1,gE=0,bP=1,bE=0;const LM=10;let allRooms=[];
-
-function toast(m,t='s'){const e=$('toast');e.className=`show ${t}`;e.innerHTML=(t==='s'?'✅ ':'❌ ')+m;clearTimeout(e._t);e._t=setTimeout(()=>e.className='',3000)}
-function fmtRp(el){let v=el.value.replace(/\D/g,'');el.value=v.replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
-function rp2n(s){return Number(s.replace(/\./g,''))||0}
-function dt(d){return d?new Date(d).toISOString().slice(0,10):''}
-function bdg(s){const m={Available:'ba',Occupied:'bo',Maintenance:'bm','On-Going':'bg',Completed:'bc',Cancelled:'bx'};return`<span class="bdg ${m[s]||'bg'}"><i></i>${s}</span>`}
-function tags(a){return(a||[]).map(f=>`<span class="tag">${f}</span>`).join('')}
-function rel(d,mn,sb,lb){return d?`<div class="rc"><b>${mn(d)}</b><small>${sb(d)}</small></div>`:`<div class="rc"><em>⚠️ ${lb}</em></div>`}
-function pgn(nv,inf,tot,cur,fn){const n=$(nv);n.innerHTML='';$(inf).textContent=`Halaman ${cur} dari ${tot}`;for(let i=1;i<=tot;i++){const b=document.createElement('button');b.className='pb'+(i===cur?' on':'');b.textContent=i;b.onclick=()=>fn(i);n.appendChild(b)}}
-function ac(ef,df){return`<div class="ta"><button class="be" onclick="${ef}">✏️ Edit</button><button class="bd" onclick="${df}">🗑 Hapus</button></div>`}
-
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
-  document.querySelectorAll('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==b.dataset.tab);
-});
-
-async function fetchR(p=1){rP=p;
-  const res=await fetch(`${A}/rooms?page=${p}&limit=${LM}`).catch(()=>null);
-  if(!res)return $('rTB').innerHTML=`<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--rd)">⚠️ Server tidak dapat dijangkau.</td></tr>`;
-  const r=await res.json(),d=r.data??r;
-  $('rCnt').innerHTML=`Menampilkan <strong>${d.length}</strong> dari <strong>${r.totalData??d.length}</strong> kamar`;
-  $('rTB').innerHTML=d.length?d.map(x=>`<tr><td><span class="id">${x._id}</span></td><td>${x.type}</td><td class="pc">Rp ${x.price.toLocaleString('id-ID')}<small>/malam</small></td><td>${tags(x.facilities)}</td><td>${bdg(x.status)}</td><td><span class="fp">${x.floor}</span></td><td>${ac(`editR(${JSON.stringify(x).replace(/'/g,"\\'")})`,'delR('+x._id+')')}</td></tr>`).join(''):`<tr><td colspan="7" style="text-align:center;padding:36px;color:var(--mu)">Belum ada data kamar.</td></tr>`;
-  if(r.totalPages)pgn('rPN','rPI',r.totalPages,r.currentPage,fetchR);
-}
-$('rF').onsubmit=async e=>{e.preventDefault();const id=$('rId').value;
-  const d={_id:Number(id),type:$('rTp').value,price:rp2n($('rPr').value),facilities:$('rFc').value.split(',').map(f=>f.trim()),status:$('rSt').value,floor:Number($('rFl').value)};
-  const res=await fetch(rE?`${A}/rooms/${id}`:`${A}/rooms`,{method:rE?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).catch(()=>null);
-  res?.ok?(toast(rE?'Kamar diperbarui!':'Kamar ditambahkan!'),$('rF').reset(),resetR(),fetchR(1),loadDrop()):toast('Gagal menyimpan kamar.','e')};
-function editR(x){rE=1;$('rFT').textContent=`Edit Kamar #${x._id}`;$('rMI').className='mode me';$('rMT').textContent=`Mode: Edit #${x._id}`;$('rBS').textContent='💾 Simpan Perubahan';$('rBC').style.display='flex';$('rId').value=x._id;$('rId').disabled=true;$('rTp').value=x.type;$('rPr').value=x.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');$('rFc').value=x.facilities.join(', ');$('rSt').value=x.status;$('rFl').value=x.floor}
-async function delR(id){if(!confirm(`Hapus kamar #${id}?`))return;const res=await fetch(`${A}/rooms/${id}`,{method:'DELETE'}).catch(()=>null);res?.ok?(toast(`Kamar #${id} dihapus.`),fetchR(rP),loadDrop()):toast('Gagal hapus.','e')}
-$('rBC').onclick=()=>{$('rF').reset();resetR()}
-function resetR(){rE=0;$('rFT').textContent='Tambah Kamar Baru';$('rMI').className='mode ma';$('rMT').textContent='Mode: Tambah Data Baru';$('rBS').textContent='💾 Simpan Kamar';$('rBC').style.display='none';$('rId').disabled=false}
-
-async function fetchG(p=1){gP=p;
-  const res=await fetch(`${A}/guests?page=${p}&limit=${LM}`).catch(()=>null);
-  if(!res)return $('gTB').innerHTML=`<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--rd)">⚠️ Server tidak dapat dijangkau.</td></tr>`;
-  const r=await res.json(),d=r.data??r;
-  $('gCnt').innerHTML=`Menampilkan <strong>${d.length}</strong> dari <strong>${r.totalData??d.length}</strong> tamu`;
-  $('gTB').innerHTML=d.length?d.map(x=>`<tr><td><span class="id">${x._id}</span></td><td>${x.name}</td><td>${x.email}</td><td>${x.phone}</td><td>${x.city}</td><td>${ac(`editG(${JSON.stringify(x).replace(/'/g,"\\'")})`,'delG("'+x._id+'")')}</td></tr>`).join(''):`<tr><td colspan="6" style="text-align:center;padding:36px;color:var(--mu)">Belum ada data tamu.</td></tr>`;
-  if(r.totalPages)pgn('gPN','gPI',r.totalPages,r.currentPage,fetchG);
-}
-$('gF').onsubmit=async e=>{e.preventDefault();const id=$('gId').value;
-  const d={_id:id,name:$('gNm').value,email:$('gEm').value,phone:$('gPh').value,city:$('gCt').value};
-  const res=await fetch(gE?`${A}/guests/${id}`:`${A}/guests`,{method:gE?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).catch(()=>null);
-  res?.ok?(toast(gE?'Tamu diperbarui!':'Tamu ditambahkan!'),$('gF').reset(),resetG(),fetchG(1),loadDrop()):toast('Gagal menyimpan tamu.','e')};
-function editG(x){gE=1;$('gFT').textContent=`Edit Tamu #${x._id}`;$('gMI').className='mode me';$('gMT').textContent=`Mode: Edit #${x._id}`;$('gBS').textContent='💾 Simpan Perubahan';$('gBC').style.display='flex';$('gId').value=x._id;$('gId').disabled=true;$('gNm').value=x.name;$('gEm').value=x.email;$('gPh').value=x.phone;$('gCt').value=x.city}
-async function delG(id){if(!confirm(`Hapus tamu ${id}?`))return;const res=await fetch(`${A}/guests/${id}`,{method:'DELETE'}).catch(()=>null);res?.ok?(toast(`Tamu ${id} dihapus.`),fetchG(gP),loadDrop()):toast('Gagal hapus.','e')}
-$('gBC').onclick=()=>{$('gF').reset();resetG()}
-function resetG(){gE=0;$('gFT').textContent='Tambah Tamu Baru';$('gMI').className='mode ma';$('gMT').textContent='Mode: Tambah Data Baru';$('gBS').textContent='💾 Simpan Tamu';$('gBC').style.display='none';$('gId').disabled=false}
-
-async function fetchB(p=1){bP=p;
-  const res=await fetch(`${A}/bookings?page=${p}&limit=${LM}`).catch(()=>null);
-  if(!res)return $('bTB').innerHTML=`<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--rd)">⚠️ Server tidak dapat dijangkau.</td></tr>`;
-  const r=await res.json(),d=r.data??r;
-  $('bCnt').innerHTML=`Menampilkan <strong>${d.length}</strong> dari <strong>${r.totalData??d.length}</strong> pemesanan`;
-  $('bTB').innerHTML=d.length?d.map(x=>`<tr><td><span class="id">${x._id}</span></td><td>${rel(x.guest_detail,g=>g.name,g=>g.city||'-','Tamu?')}</td><td>${rel(x.room_detail,r=>'Kamar '+r._id,r=>r.type||'-','Kamar?')}</td><td>${new Date(x.check_in).toLocaleDateString('id-ID')}</td><td>${new Date(x.check_out).toLocaleDateString('id-ID')}</td><td class="pc">Rp ${(x.total_payment||0).toLocaleString('id-ID')}</td><td>${bdg(x.status)}</td><td>${ac(`editB(${JSON.stringify(x).replace(/'/g,"\\'")})`,'delB("'+x._id+'")')}</td></tr>`).join(''):`<tr><td colspan="8" style="text-align:center;padding:36px;color:var(--mu)">Belum ada data pemesanan.</td></tr>`;
-  if(r.totalPages)pgn('bPN','bPI',r.totalPages,r.currentPage,fetchB);
-}
-$('bF').onsubmit=async e=>{e.preventDefault();const id=$('bId').value;
-  if(!$('bTp').value)return toast('Pastikan kamar, check-in, dan check-out sudah valid agar total bayar terhitung.','e');
-  const d={_id:id,guest_id:$('bGs').value,room_id:Number($('bRm').value),check_in:$('bCI').value,check_out:$('bCO').value,total_payment:rp2n($('bTp').value),status:$('bSt').value};
-  const res=await fetch(bE?`${A}/bookings/${id}`:`${A}/bookings`,{method:bE?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).catch(()=>null);
-  res?.ok?(toast(bE?'Pemesanan diperbarui!':'Pemesanan ditambahkan!'),$('bF').reset(),resetB(),fetchB(1)):toast('Gagal menyimpan pemesanan.','e')};
-function editB(x){bE=1;$('bFT').textContent=`Edit Pemesanan #${x._id}`;$('bMI').className='mode me';$('bMT').textContent=`Mode: Edit #${x._id}`;$('bBS').textContent='💾 Simpan Perubahan';$('bBC').style.display='flex';$('bId').value=x._id;$('bId').disabled=true;$('bGs').value=x.guest_id;renderRoomOptions(x.room_id);$('bRm').value=x.room_id;$('bCI').value=dt(x.check_in);$('bCO').value=dt(x.check_out);$('bTp').value=(x.total_payment||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');$('bSt').value=x.status}
-async function delB(id){if(!confirm(`Hapus pemesanan ${id}?`))return;const res=await fetch(`${A}/bookings/${id}`,{method:'DELETE'}).catch(()=>null);res?.ok?(toast(`Pemesanan ${id} dihapus.`),fetchB(bP)):toast('Gagal hapus.','e')}
-$('bBC').onclick=()=>{$('bF').reset();resetB()}
-function resetB(){bE=0;$('bFT').textContent='Tambah Pemesanan Baru';$('bMI').className='mode ma';$('bMT').textContent='Mode: Tambah Data Baru';$('bBS').textContent='💾 Simpan Pemesanan';$('bBC').style.display='none';$('bId').disabled=false;renderRoomOptions();$('bTp').value=''}
-
-async function loadDrop(){
-  const[gr,rr]=await Promise.all([fetch(`${A}/guests?limit=200`),fetch(`${A}/rooms?limit=200`)]).catch(()=>[null,null]);
-  if(!gr||!rr)return;
-  const gs=(await gr.json()).data??[];
-  allRooms=(await rr.json()).data??[];
-  $('bGs').innerHTML='<option value="">— Pilih Tamu —</option>'+gs.map(g=>`<option value="${g._id}">${g._id} — ${g.name}</option>`).join('');
-  renderRoomOptions();
-}
-function renderRoomOptions(selectedId){
-  let avail=allRooms.filter(r=>r.status==='Available');
-  if(selectedId!=null&&!avail.some(r=>String(r._id)===String(selectedId))){
-    const cur=allRooms.find(r=>String(r._id)===String(selectedId));
-    if(cur)avail=[cur,...avail];
-  }
-  $('bRm').innerHTML='<option value="">— Pilih Kamar —</option>'+avail.map(r=>`<option value="${r._id}">Kamar ${r._id} — ${r.type} (Rp ${r.price.toLocaleString('id-ID')}/malam)${r.status!=='Available'?' — sedang dipesan':''}</option>`).join('');
-}
-function calcTotal(){
-  const ci=$('bCI').value,co=$('bCO').value,roomId=$('bRm').value;
-  if(!ci||!co||!roomId)return $('bTp').value='';
-  const room=allRooms.find(r=>String(r._id)===String(roomId));
-  if(!room)return $('bTp').value='';
-  const nights=Math.round((new Date(co)-new Date(ci))/86400000);
-  $('bTp').value=nights>0?(nights*room.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.'):'';
-}
-$('bRm').onchange=calcTotal;$('bCI').onchange=calcTotal;$('bCO').onchange=calcTotal;
-window.onload=()=>{fetchR();fetchG();fetchB();loadDrop()};
-</script>
+<script src="app.js"></script>
 </body>
 </html>
